@@ -1,0 +1,23 @@
+[
+  {
+    "name": "create_lab_topology_two_routers",
+    "description": "Cria uma nova topologia no Cisco CML2 com dois roteadores (por exemplo, R1 e R2) da imagem iol-xe, conectados pela interface e0/0, e com endereçamento IP 10.1.2.1/24 no primeiro roteador e 10.1.2.2/24 no segundo. Os roteadores são configurados com as configurações básicas de hostname e IP nas interfaces e0/0.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "router1_name": {
+          "type": "string",
+          "description": "O nome do primeiro roteador, como R1."
+        },
+        "router2_name": {
+          "type": "string",
+          "description": "O nome do segundo roteador, como R2."
+        }
+      },
+      "required": [
+        "router1_name",
+        "router2_name"
+      ]
+    }
+  }
+]
