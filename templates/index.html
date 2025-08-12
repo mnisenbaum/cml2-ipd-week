@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CML2 Automation Chatbot</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        #chat-window { border: 1px solid #ccc; padding: 1em; height: 400px; overflow-y: scroll; margin-bottom: 1em; }
+        #user-input { width: 80%; padding: 0.5em; }
+        #send-button { padding: 0.5em 1em; }
+    </style>
+</head>
+<body>
+    <h1>Chatbot de Automação CML2</h1>
+    <div id="chat-window"></div>
+    <input type="text" id="user-input" placeholder="Digite sua requisição aqui...">
+    <button id="send-button">Enviar</button>
+
+    <script>
+        const chatWindow = document.getElementById('chat-window');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        sendButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function appendMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatWindow.appendChild(messageElement);
+            chatWindow.scrollTop = chatWindow.scrollHeight; // Auto-scroll
+        }
+
+        async function sendMessage() {
+            const message = userInput.value;
+            if (message.trim() === '') return;
+            appendMessage('Você', message);
+            userInput.value = '';
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+                const data = await response.json();
+                appendMessage('Chatbot', data.response);
+            } catch (error) {
+                appendMessage('Chatbot', 'Erro ao se comunicar com o backend.');
+                console.error('Error:', error);
+            }
+        }
+
+        appendMessage('Chatbot', 'Olá! Sou um especialista em automação de CML2. O que você gostaria de fazer? Por exemplo, "Crie um laboratório com R1 e R2".');
+    </script>
+</body>
+</html>
