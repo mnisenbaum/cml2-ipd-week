@@ -18,7 +18,7 @@ O projeto é composto pelos seguintes arquivos:
 
   * **`app.py`**: O backend, um servidor web em Python que orquestra a comunicação entre o frontend, a API do Google AI Studio e a API do CML2.
   * **`templates/index.html`**: O frontend, uma página web simples com a interface do chat.
-  * **`modelos-gemini.py`**: O arquivo de definição da função para o Google AI Studio, que ensina a IA a reconhecer a intenção de criar o laboratório.
+  * **`function.calling.json`**: O arquivo de definição da função para o Google AI Studio, que ensina a IA a reconhecer a intenção de criar o laboratório.
   * **`.env.example`**: Um modelo para o arquivo de variáveis de ambiente, utilizado para armazenar credenciais de forma segura.
 
 -----
